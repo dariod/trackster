@@ -52,7 +52,7 @@ h1 {
 }
 #searchInput:focus {
   outline: none;
-  color: rgb(35, 2, 63);
+  color: rgb(74, 74, 74);
 }
 
 #searchButton {
@@ -63,6 +63,10 @@ h1 {
   border: 0;
   padding: 0 0.5em;
   margin: 0.25rem 0;
+}
+
+#searchButton:hover {
+  background-color: rgb(255, 0, 171);
 }
 
 .resultsHeader {
