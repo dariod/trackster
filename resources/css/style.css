@@ -19,6 +19,10 @@ h1 {
   margin: 0;
 }
 
+.lessPadding {
+  padding: .25rem;
+}
+
 .searchInputContainer {
   display: flex;
   border-radius: 2em;
@@ -51,7 +55,6 @@ h1 {
   color: rgb(35, 2, 63);
 }
 
-
 #searchButton {
   border-radius: 2em;
   background-color: rgb(255,102,204);
@@ -62,6 +65,9 @@ h1 {
   margin: 0.25rem 0;
 }
 
-.lessPadding {
-  padding: .25rem;
+.resultsHeader {
+  height: 3em;
+  padding: 1em 0;
+  background-color: rgb(104, 0, 255);
+  color: rgb(255,255,255)
 }
