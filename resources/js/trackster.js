@@ -6,6 +6,12 @@ $( document ).ready(function() {
     /*
       Search button handler
     */
+    $("#searchInput").keypress(function(key) {
+      if(key.which == 13) {
+        $("#searchButton").click();
+      }
+    });
+
     $("#searchButton").click(function() {
       console.log("#searchButton: .click()");
       console.log("#searchInput content: '" + $('#searchInput').val() + "'");
