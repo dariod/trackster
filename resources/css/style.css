@@ -38,7 +38,7 @@ h1 {
 #xButton {
   border: 0;
   padding: 0;
-  3margin: 3px -1em 0 0;
+  margin: 3px -1em 0 0;
   height: 100%;
   padding: 0.5em 1em 0 0;
 }
@@ -88,4 +88,8 @@ h1 {
 .fa-play-circle-o {
   color: rgb(255, 0, 171);
   margin-top: -0.25em;
+}
+
+.tableCell {
+  overflow: hidden;
 }
