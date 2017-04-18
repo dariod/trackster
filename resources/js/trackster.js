@@ -9,13 +9,14 @@ $( document ).ready(function() {
         console.log("Pressed ENTER on #searchInput");
         $("#searchButton").click();
       }
+      return
     });
 
     $("#searchButton").click(function() {
       if ($('#searchInput').val().trim() !== '') {
         Trackster.searchTracksByTitle($('#searchInput').val());
       }
-
+      return
     });
 
     /*
@@ -27,9 +28,17 @@ $( document ).ready(function() {
         Do not understand why this second one is necessary? Safari related bug?
       */
       $("#searchInput").val(null);
+      return
     });
 });
 
+/*
+  Give a duration in ms returns a durtaion in the format mm:ss
+ */
+Trackster.msToDuration = function (ms) {
+  var options = { minute: '2-digit', second: '2-digit' };
+  return (new Intl.DateTimeFormat('en-US', options).format(ms));
+}
 /*
   Given an array of track data, create the HTML for a Bootstrap row for each.
   Append each "row" to the container in the body to display all tracks.
@@ -39,12 +48,12 @@ Trackster.renderTracks = function(tracks) {
   for (var track in tracks) {
     var trackRow = '<div class="row" id="resultRow">' +
     '<div class="col-xs-1 text-center"><a href="' + tracks[track].preview_url + '"><i class="fa fa-play-circle-o fa-2x" aria-hidden="true"></i></a></div>' +
-    '<div class="col-xs-1 text-right tableCell"><span>' + track + '</span></div>'+
-    '<div class="col-xs-3 tableCell"><span>' + tracks[track].name + '</span></div>'+
-    '<div class="col-xs-2 tableCell"><span>' + tracks[track].artists[0].name + '</span></div>'+
-    '<div class="col-xs-3 tableCell"><span>' + tracks[track].album.name + '</span></div>'+
-    '<div class="col-xs-1 tableCell"><span>' + tracks[track].popularity + '</span></div>'+
-    '<div class="col-xs-1 tableCell"><span>' + tracks[track].duration_ms + '</span></div></div>';
+    '<div class="col-xs-1 text-right"><span>' + track + '</span></div>'+
+    '<div class="col-xs-3"><span>' + tracks[track].name + '</span></div>'+
+    '<div class="col-xs-2 hidden-xs"><span>' + tracks[track].artists[0].name + '</span></div>'+
+    '<div class="col-xs-3 hidden-sm hidden-xs"><span>' + tracks[track].album.name + '</span></div>'+
+    '<div class="col-xs-1 hidden-sm hidden-xs"><span>' + tracks[track].popularity + '</span></div>'+
+    '<div class="col-xs-1 hidden-sm hidden-xs"><span>' + Trackster.msToDuration(tracks[track].duration_ms) + '</span></div></div>';
     $('#results').append(trackRow);
   }
 };

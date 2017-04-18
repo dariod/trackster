@@ -4,6 +4,7 @@ TracksterTests.runAllTracksterTests = function() {
   var errors = [];
   TracksterTests.testSearchTracksByTitle(errors);
   TracksterTests.testRenderTracks(errors);
+  TracksterTests.testMsToDuration(errors);
   TracksterTests.logErrors(errors);
 };
 
@@ -132,6 +133,33 @@ TracksterTests.mock = function(object, functionName) {
     }
   };
 };
+
+TracksterTests.testMsToDuration = function (errors) {
+  var hasMsToDuration = Trackster.msToDuration && typeof Trackster.msToDuration === 'function';
+  if (!hasMsToDuration) {
+    errors.push("renderTracks: Trackster object should have a function called msToDuration.");
+    /*
+      If function msToDuration is not present the followign tests will not work
+    */
+    return
+  }
+
+  var tests = [
+      {in: 15245, out:"00:15"},
+      {in: 60000, out:"01:00"},
+      {in:127000, out:"02:07"},
+      {in:205000, out:"03:25"},
+      {in:794000, out:"13:14"}
+    ];
+
+  for ( var test in tests) {
+    var res = Trackster.msToDuration(tests[test].in);
+    if ( res !== tests[test].out) {
+      errors.push("msToDuration: msToDuration(" + tests[test].in + ") should return " + tests[test].out + ". Returned " + res);
+    };
+  }
+
+}
 
 TracksterTests.logErrors = function(errors) {
   if (errors.length === 0) {
