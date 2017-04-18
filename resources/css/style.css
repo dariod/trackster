@@ -89,3 +89,9 @@ h1 {
   color: rgb(255, 0, 171);
   margin-top: -0.25em;
 }
+
+.noTextWrapping {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
