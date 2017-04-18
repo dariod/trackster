@@ -47,13 +47,13 @@ Trackster.renderTracks = function(tracks) {
   $('#results').empty();
   for (var track in tracks) {
     var trackRow = '<div class="row" id="resultRow">' +
-    '<div class="col-xs-1 text-center"><a href="' + tracks[track].preview_url + '"><i class="fa fa-play-circle-o fa-2x" aria-hidden="true"></i></a></div>' +
-    '<div class="col-xs-1 text-right"><span>' + track + '</span></div>'+
-    '<div class="col-xs-3"><span>' + tracks[track].name + '</span></div>'+
-    '<div class="col-xs-2 hidden-xs"><span>' + tracks[track].artists[0].name + '</span></div>'+
-    '<div class="col-xs-3 hidden-sm hidden-xs"><span>' + tracks[track].album.name + '</span></div>'+
-    '<div class="col-xs-1 hidden-sm hidden-xs"><span>' + tracks[track].popularity + '</span></div>'+
-    '<div class="col-xs-1 hidden-sm hidden-xs"><span>' + Trackster.msToDuration(tracks[track].duration_ms) + '</span></div></div>';
+    '<div class="               col-xs-1  col-sm-1  col-md-1 col-lg-1 text-center"><a href="' + tracks[track].preview_url + '"><i class="fa fa-play-circle-o fa-2x" aria-hidden="true"></i></a></div>' +
+    '<div class="noTextWrapping col-xs-1  col-sm-1  col-md-1 col-lg-1 text-right">' + track + '</div>'+
+    '<div class="noTextWrapping col-xs-10 col-sm-7  col-md-3 col-lg-3">' + tracks[track].name + '</div>'+
+    '<div class="noTextWrapping hidden-xs col-sm-3  col-md-2 col-lg-2">' + tracks[track].artists[0].name + '</div>'+
+    '<div class="noTextWrapping hidden-xs hidden-sm col-md-3 col-lg-3">' + tracks[track].album.name + '</div>'+
+    '<div class="noTextWrapping hidden-xs hidden-sm col-md-1 col-lg-1">' + tracks[track].popularity + '</div>'+
+    '<div class="noTextWrapping hidden-xs hidden-sm col-md-1 col-lg-1">' + Trackster.msToDuration(tracks[track].duration_ms) + '</div></div>';
     $('#results').append(trackRow);
   }
 };
