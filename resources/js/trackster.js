@@ -64,7 +64,7 @@ Trackster.renderTracks = function(tracks) {
 */
 Trackster.searchTracksByTitle = function(title) {
   $.ajax({
-    url: "https://api.spotify.com/v1/search?type=track&q=" + title.replace(" ","+"),
+    url: "https://api.spotify.com/v1/search?type=track&q=" + title.replace(" ","+") + "&limit=50",
     dataType: "json",
     beforeSend: function () {
       /*
