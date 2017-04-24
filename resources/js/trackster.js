@@ -46,7 +46,7 @@ Trackster.renderTracks = function(tracks) {
   $('#results').empty();
   for (var track in tracks) {
     var trackRow = '<div class="row" id="resultRow">' +
-    '<div class="               col-xs-1  col-sm-1  col-md-1 col-lg-1 text-center playBackCtrl" href="' + tracks[track].preview_url + '" track="' + track + '"><i class="fa fa-play-circle fa-2x" aria-hidden="true"></i></div>' +
+    '<div class="               col-xs-1  col-sm-1  col-md-1 col-lg-1 text-center playBackCtrl" href="' + tracks[track].preview_url + '" track="' + track + '"><i class="fa fa-play-circle-o fa-2x" aria-hidden="true"></i></div>' +
     '<div class="noTextWrapping col-xs-1  col-sm-1  col-md-1 col-lg-1 text-right">' + track + '</div>'+
     '<div class="noTextWrapping col-xs-10 col-sm-7  col-md-3 col-lg-3">' + tracks[track].name + '</div>'+
     '<div class="noTextWrapping hidden-xs col-sm-3  col-md-2 col-lg-2">' + tracks[track].artists[0].name + '</div>'+
@@ -64,8 +64,8 @@ Trackster.renderTracks = function(tracks) {
     // Make sure the icon for the track currently active is back to the Play
     // button
     // Change the icon for the currently clicked track to the "Pause" one.
-    $(Trackster.activeAudio.tableRef).children("i").removeClass('fa-pause-circle');
-    $(Trackster.activeAudio.tableRef).children("i").addClass('fa-play-circle');
+    $(Trackster.activeAudio.tableRef).children("i").removeClass('fa-pause-circle-o');
+    $(Trackster.activeAudio.tableRef).children("i").addClass('fa-play-circle-o');
 
     // Handle pause button: clicking twice on the same row should result
     // into audio stopping
@@ -76,10 +76,13 @@ Trackster.renderTracks = function(tracks) {
       Trackster.activeAudio.audioTrack.src = $(this).attr("href");
 
       // Change the icon for the currently clicked track to the "Pause" one.
-      $(this).children("i").removeClass('fa-play-circle');
-      $(this).children("i").addClass('fa-pause-circle');
+      $(this).children("i").removeClass('fa-play-circle-o');
+      $(this).children("i").addClass('fa-pause-circle-o');
 
-      // $(this).children(".fa-play-circle-o").class='fa fa-pause-circle fa-2x';
+      Trackster.activeAudio.audioTrack.onended = function () {
+        $(Trackster.activeAudio.tableRef).children("i").removeClass('fa-pause-circle-o');
+        $(Trackster.activeAudio.tableRef).children("i").addClass('fa-play-circle-o');
+      }
 
       // Play the clicked track
       Trackster.activeAudio.audioTrack.play();
