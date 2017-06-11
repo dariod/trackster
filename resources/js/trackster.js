@@ -1,5 +1,16 @@
 var Trackster = {};
 
+/*
+  Audio track/line selected for playing
+*/
+Trackster.activeAudio = {
+  audioTrack: document.createElement('audio'),
+  tableRef: null
+};
+
+/*
+  The interface functions.
+*/
 $( document ).ready( function() {
     /*
       Search button handler
@@ -96,12 +107,6 @@ Trackster.renderTracks = function(tracks) {
   });
 };
 
-Trackster.activeAudio = {
-  audioTrack: document.createElement('audio'),
-  tableRef: null
-}
-
-
 /*
   Given a search term as a string, query the Spotify API.
   Render the tracks given in the API query response.
@@ -128,7 +133,11 @@ Trackster.searchTracksByTitle = function(title) {
       });
       },
     success: function (data) {
-      Trackster.renderTracks(data["tracks"]["items"]);
+      /*
+        This one will hold the tracks returned by the search.
+      */
+      Trackster.tracks=data["tracks"]["items"];
+      Trackster.renderTracks(Trackster.tracks);
       },
     complete: function () {
       /*
@@ -151,3 +160,22 @@ Trackster.searchTracksByTitle = function(title) {
     }
   });
 };
+
+/*
+  Sorting functions
+*/
+Trackster.sortByPopularity = function () {
+  Trackster.tracks=Trackster.tracks.sort(function (a,b) { return (b.popularity - a.popularity)} );
+}
+Trackster.sortByDuration = function () {
+  Trackster.tracks=Trackster.tracks.sort(function (a,b) { return (b.duration_ms - a.duration_ms)} );
+}
+Trackster.sortByAlbum = function () {
+  Trackster.tracks=Trackster.tracks.sort(function (a,b) { if (b.album.name >= a.album.name) { return -1 } else { return 1 } } );
+}
+Trackster.sortByArtist = function () {
+  Trackster.tracks=Trackster.tracks.sort(function (a,b) { if (b.artists[0].name >= a.artists[0].name) { return -1 } else { return 1 } } );
+}
+Trackster.sortBySong = function () {
+  Trackster.tracks=Trackster.tracks.sort(function (a,b) { if (b.name >= a.name) { return -1 } else { return 1 } } );
+}
